@@ -1,0 +1,19 @@
+HELP.md
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+log/
+mvnw
+mvnw.cmd
+.mvn/
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+.idea/
+*.iws
+*.iml
+*.ipr
+.idea/*

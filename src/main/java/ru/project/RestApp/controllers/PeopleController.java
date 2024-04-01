@@ -1,11 +1,13 @@
 package ru.project.RestApp.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.GsonBuilderUtils;
+import org.springframework.web.bind.annotation.*;
 import ru.project.RestApp.models.Person;
 import ru.project.RestApp.services.PeopleService;
+import ru.project.RestApp.util.PersonErrorResponse;
+import ru.project.RestApp.util.PersonNotFoundException;
 
 import java.util.List;
 
@@ -29,4 +31,14 @@ public class PeopleController {
     public Person getPerson(@PathVariable("id") int id) {
         return peopleService.findOne(id);
     }
+
+    @ExceptionHandler
+    private ResponseEntity<PersonErrorResponse> handleException(PersonNotFoundException e) {
+        PersonErrorResponse response = new PersonErrorResponse("Person with this id wasn`t found", System.currentTimeMillis());
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
 }
+
+
